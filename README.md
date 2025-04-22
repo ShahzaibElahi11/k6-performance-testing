@@ -150,7 +150,8 @@ Adjust thresholds, colors, and max value if using a gauge.
 Run your K6 flip coin script:
 
 ```bash
-K6_OUT=influxdb=http://localhost:8086/k6 k6 run flip-coin-test.js
+$env:K6_OUT = "influxdb=http://localhost:8086/k6"
+k6 run flip-coin-test.js
 ```
 
 
