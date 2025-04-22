@@ -98,3 +98,59 @@ Stop and remove containers:
 ```bash
 docker compose down
 ```
+
+## Flip Coin Implementation
+
+### 1. Edit Dashboard
+    Click + → Dashboard
+
+    Click Add new visualization
+
+### 2. Choose Visualization Type
+
+From the right panel, select Gauge (or Stat if preferred)
+
+### 3. Select Data Source
+
+Set the data source to InfluxDB
+
+
+### 4. Edit Query (Click the ✏️ pencil icon) Paste the following queries:
+
+Query A – Total Bets
+
+```bash
+SELECT sum("value") FROM "http_reqs" WHERE $timeFilter
+```
+💡 Set alias to: Total Bets
+
+Query B – Total Wins
+
+```bash
+SELECT sum("value") FROM "coin_wins" WHERE $timeFilter
+```
+💡 Set alias: Total Wins
+
+Query C – Total Losses
+
+```bash
+SELECT sum("value") FROM "coin_losses" WHERE $timeFilter
+```
+💡 Set alias: Total Losses
+
+### 5. (Optional) 🎨 Customize the Panel
+
+Title: Flip Coin Results
+
+Adjust thresholds, colors, and max value if using a gauge.
+
+### 6. ✅ Save the Dashboard
+
+
+Run your K6 flip coin script:
+
+```bash
+K6_OUT=influxdb=http://localhost:8086/k6 k6 run flip-coin-test.js
+```
+
+
